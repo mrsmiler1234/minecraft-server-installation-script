@@ -11,6 +11,13 @@ Before running the script, ensure that your system meets the following requireme
 - **Minimum RAM:** At least **2 GB** of RAM (recommended to allocate more depending on the server size).
 - **sudo privileges:** You need to have `sudo` access to install dependencies and set up the server.
 
+### Adding a map
+You can also add a map directly during installation. After installing the kernel, you will be prompted to provide a direct link to the map (in .zip or .7z format):
+
+### Addind a plugins
+After installing the map, you can also choose a set of plugins to install or skip it.
+**It is recommended to use version 1.21.4 when installing plugins via script!**
+
 ## First install
 
 Use the following steps to install the PaperMC server:
@@ -28,9 +35,3 @@ wget "https://raw.githubusercontent.com/latuk993/minecraft-server-installation-s
 chmod +x install.sh
 ./install.sh 1.16.5
 ```
-
-### Adding a map
-You can also add a map directly during installation. After installing the kernel, you will be prompted to provide a direct link to the map (in .zip or .7z format):
-
-### Addind a plugins
-After installing the map, you can also choose a set of plugins to install or skip it.
