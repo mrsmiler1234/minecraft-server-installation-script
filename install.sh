@@ -4,6 +4,7 @@ if [ -z "$1" ]; then
 fi
 
 sudo apt update -y
+sudo apt install software-properties-common -y
 sudo apt install jq curl openjdk-21-jre-headless p7zip-full -y
 
 API_URL="https://api.papermc.io/v2/projects/paper/versions/$1"
@@ -13,8 +14,8 @@ JAR_URL="$API_URL/builds/$LATEST_BUILD/downloads/paper-$1-$LATEST_BUILD.jar"
 if [[ -d "$HOME/server" ]]; then
 echo ""
 echo "[Установка] Директория $HOME/server определена. Выполнить чистую установку с удалением данных? (y/n)"
-read -r answer
-case $answer in
+read -r c_answ
+case $c_answ in
 y) 
     rm -rf $HOME/server
     mkdir $HOME/server 
@@ -45,9 +46,9 @@ echo "eula=true" > eula.txt
 
 echo ""
 echo "[Установка] Укажите максимальное кол-во потребляемой сервером ОЗУ (только число, гигабайты)"
-read -r gb
+read -r gb_answ
 
-MAX_RAM="-Xmx${gb}G"
+MAX_RAM="-Xmx${gb_answ}G"
 
 echo "java -Xms100M $MAX_RAM -jar server.jar" > start.sh
 
@@ -56,18 +57,19 @@ chmod +x start.sh
 echo ""
 echo "[Установка] Установка завершена! Запускай ./start.sh для старта сервера"
 echo "[Установка] Если хочешь сразу установить карту, впиши ПРЯМУЮ ССЫЛКУ на карту в zip/7z формате. Если не хочешь - пиши n"
-read -r answ
+read -r m_answ
 
-case $answ in 
+case $m_answ in 
 n) 
     exit
     ;;
 esac
 
-curl -o "mapw" $answ
+curl -o "mapw" $m_answ
 7za x "mapw" -oc:world/
 
 if [[ ! -d world/data ]]; then
+  echo ""
   echo "[Установка] Карта распакована, но data/ не найдена. Проверяем вложенные папки..."
   
   for dir in $HOME/server/world/*/; do
@@ -79,8 +81,84 @@ if [[ ! -d world/data ]]; then
       break
     fi
   done
+  for dir in $HOME/server/c\:world/*/; do
+    if [[ -d "$dir/data" ]]; then
+      echo "[Установка] Найдена папка с картой: $dir"
+      
+      mkdir $HOME/server/world
+      mv "$dir"/* $HOME/server/world/
+      rm -r "$dir"
+      break
+    fi
+  done
 fi
 
 cd $HOME/server
 
-echo "[Установка] Установка карты завершена! Можешь запускать сервер через ./start.sh"
+echo ""
+echo "[Установка] Разрешить подключение с пиратских клиентов и командные блоки? (y/n)"
+read -r p_answ
+
+case $p_answ in
+y) 
+    echo "online-mode=false" > server.properties
+    echo "enable-command-block=true" >> server.properties
+    ;;
+esac
+
+echo ""
+echo "[Установка] Готово! Теперь вы можете установить готовый набор плагинов! Выберите одну цифру из предложенных:"
+echo ""
+echo "---LIST---"
+echo "0. Пропустить"
+echo "1. SkinsRestorer"
+echo "2. SkinsRestorer + PaperCracker (+ MixBukkit)"
+echo "---LIST---"
+echo ""
+echo "Ваш выбор: " 
+read -r n_answ
+
+mkdir $HOME/server/plugins
+cd $HOME/server/plugins
+
+install_skinsrestorer() {
+    echo "[Установка] Устанавливаю SkinsRestorer..."
+    echo ""
+    wget https://github.com/SkinsRestorer/SkinsRestorer/releases/download/15.6.0/SkinsRestorer.jar
+    echo ""
+}
+
+install_papercracker() {
+    echo "[Установка] Устанавливаю PaperCracker..."
+    echo ""
+    wget https://github.com/latuk993/minecraft-server-installation-script/releases/download/1.0/PaperCracker.jar
+    echo ""
+}
+
+install_mixbukkit() {
+    echo "[Установка] Устанавливаю MixBukkit..."
+    echo ""
+    wget https://github.com/DragonCommissions/MixBukkit/releases/download/1.0/MixBukkit-1.0-SNAPSHOT.jar
+    echo ""
+}
+
+
+case $n_answ in
+    1)
+        install_skinsrestorer
+        ;;
+    2)
+        install_skinsrestorer
+        install_papercracker
+        install_mixbukkit
+        ;;
+    0)
+        echo "[Установка] Пропущено."
+        ;;
+    *)
+        echo "[Ошибка] Некорректный ввод."
+        ;;
+esac
+
+echo "[Установка] Готово! Вы можете запускать сервер!"
+cd $HOME
