@@ -4,12 +4,16 @@ A bash script to automatically set up and configure a PaperMC server with the la
 Use:
 
 ```shell
-wget "https://github.com/latuk993/minecraft-server-installation-script/blob/main/install.sh" && install.sh MINECRAFT-VERSION
+wget "https://raw.githubusercontent.com/latuk993/minecraft-server-installation-script/refs/heads/main/install.sh"
+chmod +x install.sh
+./install.sh MINECRAFT-VERSION
 ```
 
 Example:
 
 ```shell
-wget "https://github.com/latuk993/minecraft-server-installation-script/blob/main/install.sh" && install.sh 1.21.4
+wget "https://raw.githubusercontent.com/latuk993/minecraft-server-installation-script/refs/heads/main/install.sh"
+chmod +x install.sh
+./install.sh 1.16.5
 ```
 
