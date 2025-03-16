@@ -4,7 +4,7 @@ if [ -z "$1" ]; then
 fi
 
 sudo apt update -y
-sudo apt install jq curl openjdk-17-jre-headless p7zip-full -y
+sudo apt install jq curl openjdk-21-jre-headless p7zip-full -y
 
 API_URL="https://api.papermc.io/v2/projects/paper/versions/$1"
 LATEST_BUILD=$(curl -s "$API_URL" | jq '.builds | max')
@@ -44,7 +44,7 @@ curl -o "server.jar" $JAR_URL
 echo "eula=true" > eula.txt
 
 echo ""
-echo "[Установка] Укажите максимальное кол-во потребляемой сервером ОЗУ (только число!)"
+echo "[Установка] Укажите максимальное кол-во потребляемой сервером ОЗУ (только число, гигабайты)"
 read -r gb
 
 MAX_RAM="-Xmx${gb}G"
