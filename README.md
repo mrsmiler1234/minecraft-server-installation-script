@@ -6,7 +6,7 @@ A bash script to automatically set up and configure a PaperMC server with the la
 Before running the script, ensure that your system meets the following requirements:
 
 - **Operating System:** Ubuntu or Debian (or derivatives)
-- **Required packages:** `jq`, `curl`, `openjdk-17-jre-headless`, `p7zip-full`  
+- **Required packages:** `jq`, `curl`, `openjdk-17-jre-headless` (or `openjdk-21-jre-healess` for latest versions), `p7zip-full`  
   These will be installed automatically by the script.
 - **Minimum RAM:** At least **2 GB** of RAM (recommended to allocate more depending on the server size).
 - **sudo privileges:** You need to have `sudo` access to install dependencies and set up the server.
