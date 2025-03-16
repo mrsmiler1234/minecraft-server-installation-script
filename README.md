@@ -31,3 +31,6 @@ chmod +x install.sh
 
 ### Adding a map
 You can also add a map directly during installation. After installing the kernel, you will be prompted to provide a direct link to the map (in .zip or .7z format):
+
+### Addind a plugins
+After installing the map, you can also choose a set of plugins to install or skip it.
