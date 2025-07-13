@@ -31,7 +31,7 @@ chmod +x install.sh
 Example:
 
 ```shell
-wget "https://raw.githubusercontent.com/latuk993/minecraft-server-installation-script/refs/heads/main/install.sh"
+wget "https://raw.githubusercontent.com/mrsmiler1234/minecraft-server-installation-script/refs/heads/main/install.sh"
 chmod +x install.sh
 ./install.sh 1.21.4
 ```
