@@ -131,7 +131,7 @@ install_skinsrestorer() {
 install_papercracker() {
     echo "[Установка] Устанавливаю PaperCracker..."
     echo ""
-    wget https://github.com/latuk993/minecraft-server-installation-script/releases/download/1.0/PaperCracker.jar
+    wget https://github.com/mrsmiler1234/minecraft-server-installation-script/releases/download/1.0/PaperCracker.jar
     echo ""
 }
 
