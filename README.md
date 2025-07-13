@@ -23,7 +23,7 @@ After installing the map, you can also choose a set of plugins to install or ski
 Use the following steps to install the PaperMC server:
 
 ```shell
-wget "https://raw.githubusercontent.com/latuk993/minecraft-server-installation-script/refs/heads/main/install.sh"
+wget "https://raw.githubusercontent.com/mrsmiler1234/minecraft-server-installation-script/refs/heads/main/install.sh"
 chmod +x install.sh
 ./install.sh MINECRAFT-VERSION
 ```
